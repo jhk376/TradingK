@@ -3,13 +3,15 @@ import { StockOverviewPage } from './pages/StockOverviewPage';
 import { StockDetailPage } from './pages/StockDetailPage';
 import './App.css';
 
+
 function App() {
   return (
-    <main>
+    <main className='container'>
       <BrowserRouter>
       <Routes>
        <Route path='/' element={<StockOverviewPage />} />
-       <Route path='/detail' element={<StockDetailPage   />} />
+       <Route path="/detail/:symbol" element={<StockDetailPage/>} >
+      </Route>
       </Routes>
       </BrowserRouter>
     </main>
