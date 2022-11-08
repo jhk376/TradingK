@@ -1,17 +1,23 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import finnHub from "../api/finnHub"
+import { WatchListContext } from "../context/watchListContext"
 
 export const AutoComplete =() =>{
-    const [search, setSearch]=useState("")
-    const [results, setResults]=useState([])
+    const [search, setSearch] = useState("")
+    const [results, setResults] = useState([])
+    const {addStock} = useContext(WatchListContext)
 
     const renderDropDown =()=>{
         const dropDownClass = search ? "show" : null
         return(
-            <ul style={{height:"500px", overflowY:"scroll", overflowX:"hidden", cursor:"pointer"}} className={`dropdown-menu ${dropDownClass}`}>
+            <ul style={{height:"500px", overflowY:"scroll", 
+            overflowX:"hidden", cursor:"pointer"}} 
+            className={`dropdown-menu ${dropDownClass}`}>
                 {results.map((result)=>{
-                    return(
-                    <li key={result.symbol} className="dropdown-item">{result.description}
+                    return( 
+                    <li onClick={()=> {addStock(result.symbol);
+                        setSearch("")}} //empty the search, let the dropdown menu off after select 
+                    key={result.symbol} className="dropdown-item">{result.description}
                     ({result.symbol})</li>
                     )
                 })}
