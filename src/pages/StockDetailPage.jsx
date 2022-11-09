@@ -80,7 +80,7 @@ export const StockDetailPage =() =>{
     },[symbol])
     return <div>{           
         chartData && (<div>
-            <StockChart/>
+            <StockChart charData={chartData} symbol={symbol}/>
             </div>)//if chartData is not null (have value) then render out this data, if chartData is null return null
         }
     </div>
