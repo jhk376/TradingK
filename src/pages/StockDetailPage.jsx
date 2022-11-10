@@ -2,16 +2,18 @@ import { useEffect,useState } from "react"
 import { useParams } from "react-router-dom"
 import finnHub from "../api/finnHub"
 import { StockChart } from "../components/StockChart"
+import { StockData } from "../components/stockData"
 
 const formatData = (data) =>{
     return data.t.map((el,index)=>{
         return{
             x:el *1000, //because the api doesnt in second
-            y:data.c[index]
+            y: Math.floor(data.c[index])
 
         }
     })
 }
+
 export const StockDetailPage =() =>{
     const {symbol} = useParams()
     const [chartData, setChartData] = useState() 
@@ -78,10 +80,11 @@ export const StockDetailPage =() =>{
         }
         fetchData()
     },[symbol])
-    return <div>{           
-        chartData && (<div>
-            <StockChart charData={chartData} symbol={symbol}/>
-            </div>)//if chartData is not null (have value) then render out this data, if chartData is null return null
-        }
+    return <div>
+        {chartData && (<div>
+            <StockChart chartData = {chartData} symbol = {symbol}/>
+            <StockData symbol = {symbol}/>
+            </div>)} 
+            {/*if chartData is not null (have value) then render out this data, if chartData is null return null*/} 
     </div>
 }
