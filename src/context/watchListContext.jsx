@@ -6,6 +6,7 @@ export const WatchListContextProvider = (props) =>{
     
     const [watchList, setWatchList] = useState( localStorage.getItem("watchList")?.split(",") || ["GOOGL", "MSFT", "AMZN"])
     //? help to check error, if null return null, not error
+    
     useEffect(() => {
         localStorage.setItem("watchList", watchList)
       }, [watchList])
